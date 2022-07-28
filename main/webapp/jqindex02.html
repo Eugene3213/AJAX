@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<title>Jquery 2일 차  - ajax post 전송 + 배열로 받기</title>
+		<script src="./js/jquery.js"></script> <!-- 무조건 위에 위치 -->
+		<script src="./js/jquery-ui.js?v=2"></script>
+		<link rel="stylesheet" type="text/css" href="./js/jquery-ui.css">
+	<script>
+		$(function(){
+			$("#btn").click(function(){
+				let $nm = $("#username").val();
+				if($nm==""){
+					alert("사용자 이름을 입력하세요")
+				}
+				else{
+					$.fn.postdata($nm);
+				}
+			});
+			
+			$.fn.postdata = function($nm){
+				$.ajax({
+					url: "./test02.do",
+					catch: false,
+					type: "POST",
+					dataType: "text",
+					data: {user_name:$nm},
+					success: function($data){
+						if($data!="error"){
+							var $parse = JSON.parse($data);
+							console.log($parse["list"][0]);
+							console.log($parse["list"][1]);
+						}
+						else{
+							alert("해당 사용자는 가입자가 아닙니다");
+						}
+					},
+					error: function(){
+						console.log("통신오류 발생");
+					}
+				});
+			}
+			
+		});
+	</script>
+	</head>
+<body>
+	<input type="text" id="username" class="ui-widget ui-myinput">
+	<input type="button" value="검색" id="btn" class="ui-button">
+</body>
+</html>

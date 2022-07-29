@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Title</title>
+	<script src="./js/jquery.js"></script> <!-- 무조건 위에 위치 -->
+	
+	<script>
+		$(function(){
+			$("#data_post").click(function(){
+				var $a = $("#data").val();
+				var $b = $("#data2").val();
+				var $c = $("#data3").val();
+				location.href="./ex1.do?cal=" +$a+'&cal2=' +$b + '&job=' +$c;
+			});
+		});
+	
+		function data_post(){
+			var a = document.getElementById("data").value;
+			var b = document.getElementById("data2").value;	
+			var c = document.getElementById("data3").value;	
+			location.href="./ex1.do?cal=" +a + '$cal2=' +b +'&job=' +c;
+		}
+		
+	</script>
+
+</head>
+<body>
+	<!-- backend: cal 파라미터값 전송 -->
+	<input type ="text" id="data">
+	<input type="text" id="data2">
+	<input type = "button" value="js" onclick="data_post();">
+	<input type="button" value="jq" id="data_post">
+	<!--응용 문제: 직업군을 선택하여 location으로 전달하는 형태 
+	직업: 학생, 주부, 회사원, 프로그래머, 기타 값 전송
+	[출력 HTML]
+	선택하신 직업군은: XXXX 입니다-->
+	<select id="data3">
+		<option value="">[직업 선택]</option>
+		<option value="학생">학생</option>
+		<option value="주부">주부</option>
+		<option value="회사원">회사원</option>
+		<option value="프로그래머">프로그래머</option>
+		<option value="기타">기타</option>
+		
+	</select>
+	
+	
+	
+</body>
+</html>
